@@ -6,8 +6,23 @@ export const config: WebdriverIO.Config = {
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
     tsConfigPath: './test/tsconfig.json',
-
-    port: 4723,
+    
+    //
+    // =================
+    // Service Providers
+    // =================
+    // WebdriverIO supports Sauce Labs, Browserstack, Testing Bot and LambdaTest (other cloud providers
+    // should work too though). These services define specific user and key (or access key)
+    // values you need to put in here in order to connect to these services.
+    //
+    user: process.env.oauth-difarmo-6859d,
+    key: process.env.43bdf5b4-9473-4911-aea3-e46fcdddaa26,
+    //
+    // If you run your tests on Sauce Labs you can specify the region you want to run your tests
+    // in via the `region` property. Available short handles for regions are `us` (default) and `eu`.
+    // These regions are used for the Sauce Labs VM cloud and the Sauce Labs Real Device Cloud.
+    // If you don't provide the region it will default for the `us`
+    region: 'us',
     //
     // ==================
     // Specify Test Files
@@ -55,20 +70,10 @@ export const config: WebdriverIO.Config = {
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
         platformName: 'Android',
-        'appium:platformVersion': '12.0',
+        browserName: 'Chrome',
         'appium:deviceName': 'Android GoogleAPI Emulator',
-        "appium:app": "storage:filename=Calculator_8.4 (503542421)_APKPure.apk",
-        "appium:appPackage": "com.google.android.calculator",
-        "appium:appActivity": "com.android.calculator2.Calculator",
-        browserName: '',
-        'appium:automationName': 'UiAutomator2',
-        "appium:ensureWebviewsHavePages": true,
-        "appium:nativeWebScreenshot": true,
-        "sauce:options": {
-            "name": "Appium Desktop Session -- Dec 10, 2024 12:24 PM"
-        },
-        "appium:newCommandTimeout": 3600,
-        "appium:connectHardwareKeyboard": true
+        'appium:platformVersion': '12.0',
+        'appium:automationName': 'UiAutomator2'
     }],
 
     //
@@ -118,8 +123,8 @@ export const config: WebdriverIO.Config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium'],
-
+    // services: [],
+    //
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -127,7 +132,7 @@ export const config: WebdriverIO.Config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
-
+    
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
