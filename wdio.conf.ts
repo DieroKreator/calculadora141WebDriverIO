@@ -7,6 +7,20 @@ export const config: WebdriverIO.Config = {
     runner: 'local',
     tsConfigPath: './test/tsconfig.json',
     
+    user: 'oauth-difarmo-6859d',
+    key: '43bdf5b4-9473-4911-aea3-e46fcdddaa26',
+    services: ['sauce', 'appium'],
+    capabilities: [
+        {
+            platformName: 'Android',
+            appium: {
+                deviceName: 'Android Emulator',
+                platformVersion: '11.0',
+                automationName: 'UiAutomator2',
+                app: 'sauce-storage:your-app.apk', // Replace with your uploaded app's path
+            },
+        },
+    ],
     //
     // =================
     // Service Providers
@@ -15,8 +29,6 @@ export const config: WebdriverIO.Config = {
     // should work too though). These services define specific user and key (or access key)
     // values you need to put in here in order to connect to these services.
     //
-    user: process.env.oauth-difarmo-6859d,
-    key: process.env.43bdf5b4-9473-4911-aea3-e46fcdddaa26,
     //
     // If you run your tests on Sauce Labs you can specify the region you want to run your tests
     // in via the `region` property. Available short handles for regions are `us` (default) and `eu`.
