@@ -6,20 +6,33 @@ export const config: WebdriverIO.Config = {
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
     tsConfigPath: './test/tsconfig.json',
-    
+
     user: 'oauth-difarmo-6859d',
     key: '43bdf5b4-9473-4911-aea3-e46fcdddaa26',
     services: ['sauce', 'appium'],
+    hostname: 'ondemand.us-west-1.saucelabs.com',
+    port: 443,
+    protocol: 'https',
+    path: '/wd/hub',
     capabilities: [
         {
+            // capabilities for local Appium web tests on an Android Emulator
             platformName: 'Android',
-            appium: {
-                deviceName: 'Android Emulator',
-                platformVersion: '11.0',
-                automationName: 'UiAutomator2',
-                app: 'sauce-storage:your-app.apk', // Replace with your uploaded app's path
+            browserName: '',
+            'appium:deviceName': 'Samsung Galaxy S9 FHD GoogleAPI Emulator',
+            'appium:platformVersion': '9.0',
+            'appium:app': 'sauce-storage:Calculator_8.4 (503542421)_APKPure.apk',
+            'appium:appPackage': 'com.google.android.calculator',
+            'appium:appActivity': 'com.android.calculator2.Calculator',
+            'appium:automationName': 'UiAutomator2',
+            'appium:ensureWebviewsHavePages': true,
+            'appium:nativeWebScreenshot': true,
+            'sauce:options': {
+                'name': 'My Calculator App Test',
+                'build': 'Build-1234',
+                'tags': ['calculator', 'android', 'emulator']
             },
-        },
+        }
     ],
     //
     // =================
@@ -79,15 +92,6 @@ export const config: WebdriverIO.Config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-        // capabilities for local Appium web tests on an Android Emulator
-        platformName: 'Android',
-        browserName: 'Chrome',
-        'appium:deviceName': 'Android GoogleAPI Emulator',
-        'appium:platformVersion': '12.0',
-        'appium:automationName': 'UiAutomator2'
-    }],
-
     //
     // ===================
     // Test Configurations
@@ -144,7 +148,7 @@ export const config: WebdriverIO.Config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
-    
+
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
